@@ -10,6 +10,14 @@ public class Rectangle2D extends Shape2D{
         this.setName("Rectangle");
     }
 
+    public Rectangle2D(double x, double y, double width, double height) {
+        this.setName("Rectangle");
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+
     public double[] getBounds() { //returns 4 floats
         double[] output = {this.x, this.y, this.width, this.height};
         return output;

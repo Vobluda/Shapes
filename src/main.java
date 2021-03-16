@@ -4,7 +4,8 @@ import java.util.Scanner;
 public class main {
 
     public static void main(String[] args) {
-        ArrayList<MyFrame> frames = new ArrayList<MyFrame>();
+        MyFrame frame = new MyFrame();
+        ArrayList<Shape2D> shapes = new ArrayList<Shape2D>();
 
         int inputInt = 0;
         Scanner input = new Scanner(System.in);
@@ -16,16 +17,10 @@ public class main {
             if (inputInt == 1) {
                 System.out.println("What is the number of the shape you wish to retrieve: ");
                 inputInt = input.nextInt();
-                try {
-                    frames.get(inputInt - 1).setVisible(true);
-                } catch(Exception e) {
-                    System.out.println("That shape ID could not be found.");
-                }
+
+                // SHOW SHAPE ON PANEL
 
             } else if (inputInt == 2) {
-                for (int i = 0; i < frames.size(); i++) {
-                    frames.get(i).setVisible(false);
-                }
 
                 System.out.printf("You are inputting a new shape.%nWhat kind of shape:%n1) Rectangle%n2) Circle%n3) Line%n");
                 inputInt = input.nextInt();
@@ -51,8 +46,8 @@ public class main {
                     height = input.nextInt();
 
                     rect.setBounds(x, y, width, height);
-                    MyFrame myFrame = new MyFrame(rect);
-                    frames.add(myFrame);
+                    shapes.add(rect);
+                    frame.getPanel().setCurr(rect);
 
                 } else if (inputInt == 2) {
                     Circle2D circle = new Circle2D();
@@ -70,8 +65,9 @@ public class main {
                     radius = input.nextInt();
 
                     circle.setBounds(x, y, radius);
-                    MyFrame myFrame = new MyFrame(circle);
-                    frames.add(myFrame);
+                    shapes.add(circle);
+                    frame.getPanel().setCurr(circle);
+
 
                 } else if (inputInt == 3) {
                     Line2D line = new Line2D();
@@ -93,10 +89,11 @@ public class main {
                     y2 = input.nextInt();
 
                     line.setBounds(x1, y1, x2, y2);
-                    MyFrame myFrame = new MyFrame(line);
-                    frames.add(myFrame);
+                    shapes.add(line);
+                    frame.getPanel().setCurr(line);
+
                 }
-                System.out.println("This shape was stored as the " + frames.size() + "th shape in storage. Use this number to reference it when loading it.");
+                System.out.println("This shape was stored as the " + shapes.size() + "th shape in storage. Use this number to reference it when loading it.");
             } else {break;}
 
             System.out.printf("Hello! This program allows you to draw shapes! If you wish to escape, input -1. If you wish to proceed, input the number of the answer you wish to select.%nWould you like to:%n1) Load a shape%n2) Input a new shape?%n");
